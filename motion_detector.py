@@ -24,7 +24,7 @@ while True:
             continue
         status = 1
         (x,y,w,h) = cv2.boundingRect(contour)
-        cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),3)
+        cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),5)
     status_list.append(status)
     if(status_list[-2]==0 and status_list[-1]==1):
         times.append(datetime.now())
@@ -41,7 +41,7 @@ while True:
     cv2.imshow('Threshold Frame',threshold_frame)
     cv2.imshow('Color frame',frame)
 for i in range(0,len(times),2):
-    df = df.append({"Start":times[i],"End":times[i+1]},ignore_index=False)
-df.to_csv('Times.csv')
+    df = df.append({"Start":times[i],"End":times[i+1]},ignore_index=True)
+df.to_csv('times.csv',index=False)
 video.release()
 cv2.destroyAllWindows()
